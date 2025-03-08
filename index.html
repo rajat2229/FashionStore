@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        .nav-links li {
+            position: relative;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px;
+        }
+        .nav-links a:hover {
+            color: red;
+        }
+        .nav-links .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            display: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            display: block;
+            padding: 10px;
+            width: 150px;
+        }
+        .icons {
+            display: flex;
+            gap: 15px;
+        }
+        .icons i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        /* Grid and Product Styles */
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+        h2 {
+            margin: 30px 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .grid {
+            display: grid;
+            gap: 15px;
+            justify-content: center;
+        }
+        .bestsellers, .categories, .shop-themes {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .image-card {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .image-card p {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .why-choose-us img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .membership {
+            background: black;
+            color: white;
+            padding: 30px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer {
+            background: red;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="data:image/png;base64,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" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">NOMAD <span style="color: red;">HOT</span></a></li>
+            <li><a href="#">TOPWEAR</a>
+                <div class="dropdown">
+                    <a href="#">T-Shirts</a>
+                    <a href="#">Shirts</a>
+                    <a href="#">Jackets</a>
+                </div>
+            </li>
+            <li><a href="#">BOTTOMWEAR</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">BESTSELLERS</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">SNEAKERS</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">COLLECTIONS</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">ACCESSORIES <span style="color: red;">NEW</span></a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">THEMES</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+            <li><a href="#">MEMBERSHIP</a>
+                <div class="dropdown">
+                    <a href="#">Jeans</a>
+                    <a href="#">Joggers</a>
+                </div>
+            </li>
+        </ul>
+        <div class="icons">
+            <i class="fa fa-search"></i>
+            <i class="fa fa-user"></i>
+            <i class="fa fa-heart"></i>
+            <i class="fa fa-shopping-bag"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>SOULFUL BESTSELLERS</h2>
+        <div class="grid bestsellers">
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1741358933_1028222.jpg" alt="Women Low Top Sneakers">
+                <p>Women Low Top Sneakers</p>
+            </div>
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1739512994_5204844.jpg" alt="Stylish Oversized Tee">
+                <p>Stylish Oversized Tee</p>
+            </div>
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1741345234_2786880.jpg" alt="Minimalist Cotton Tee">
+                <p>Minimalist Cotton Tee</p>
+            </div>
+        </div>
+
+        <h2>CATEGORIES</h2>
+        <div class="grid categories">
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Tops_copy_kSUeUkf.jpg" alt="Tops">
+                <p>Tops</p>
+            </div>
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Tshirts_copy_2_CxFs6tQ.jpg" alt="T-Shirts">
+                <p>T-Shirts</p>
+            </div>
+            <div class="image-card">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Bottomwear_copy_QURrxic.jpg" alt="Bottomwear">
+                <p>Bottomwear</p>
+            </div>
+        </div>
+
+        <h2>WHY CHOOSE US?</h2>
+        <div class="why-choose-us">
+            <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/Homepage_banner_1.jpg" alt="Why Choose Us">
+        </div>
+
+        <div class="membership">
+            <h2>MEMBERSHIP PERKS</h2>
+            <p>Big Discounts | Early Access | Priority Shipping | Birthday Discount</p>
+            <a href="#">CLICK TO KNOW MORE</a>
+        </div>
+    </div>
+
+    <div class="footer" style="text-align: center;">
+        HOMEGROWN INDIAN BRAND - Over 6 Million Happy Customers
+    </div>
+    
+
+</body>
+</html>
